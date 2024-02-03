@@ -3,6 +3,9 @@ use crate::{
     schema::rustaceans,
 };
 use diesel::prelude::*;
+use rocket::response::status;
+use rocket::http::Status;
+use rocket::response::status::Custom;
 
 pub struct RustaceanRepository;
 
@@ -40,8 +43,6 @@ impl RustaceanRepository {
     }
 
     pub fn delete(c: &mut SqliteConnection, id: i32) -> QueryResult<usize> {
-        // if let Ok(rustacean) = Self::find(c, id) {}
-        // let rustacean = Self::find(c, id)?;
         diesel::delete(rustaceans::table.find(id)).execute(c)
     }
 
